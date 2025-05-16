@@ -1,3 +1,4 @@
+// controllers/employeeController.js
 import employeeModel from "../models/employee.js";
 
 const employeeController = {};
@@ -6,36 +7,6 @@ const employeeController = {};
 employeeController.getemployee = async (req, res) => {
   const employee = await employeeModel.find();
   res.json(employee);
-};
-
-// INSERT (Crear nuevo empleado)
-employeeController.createemployee = async (req, res) => {
-  const {
-    name,
-    email,
-    password,
-    telephone,
-    dui,
-    address,
-    workstation,
-    hireDate,
-    salary,
-  } = req.body;
-
-  const newEmployee = new employeeModel({
-    name,
-    email,
-    password,
-    telephone,
-    dui,
-    address,
-    workstation,
-    hireDate,
-    salary,
-  });
-
-  await newEmployee.save();
-  res.json({ message: "Empleado guardado" });
 };
 
 // DELETE (Eliminar empleado)
@@ -66,7 +37,7 @@ employeeController.updateemployee = async (req, res) => {
     {
       name,
       email,
-      password,
+      password, // ⚠️ ¡Recomendado hashear aquí también!
       telephone,
       dui,
       address,

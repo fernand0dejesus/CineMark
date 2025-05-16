@@ -1,3 +1,4 @@
+// controllers/registerEmployeeController.js
 import employeeModel from "../models/employee.js";
 import bcryptjs from "bcryptjs";
 import jsonwebtoken from "jsonwebtoken";
