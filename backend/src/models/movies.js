@@ -36,8 +36,7 @@ const moviesSchema = new Schema(
       },
       image: {
         type: Number,
-        required: true,
-        min: 0,
+        
       },
     },
     {
