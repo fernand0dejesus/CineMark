@@ -7,7 +7,6 @@ const router = express.Router();
 router
   .route("/")
   .get(customersController.getcustomers)
-  .post(customersController.createcustomers);
 
 router
   .route("/:id")

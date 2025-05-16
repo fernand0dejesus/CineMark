@@ -1,5 +1,5 @@
-// controllers/employeeController.js
 import employeeModel from "../models/employee.js";
+import bcryptjs from "bcryptjs"; // Asegurándonos de tener bcryptjs para encriptación
 
 const employeeController = {};
 
@@ -32,21 +32,23 @@ employeeController.updateemployee = async (req, res) => {
     salary,
   } = req.body;
 
-  await employeeModel.findByIdAndUpdate(
-    req.params.id,
-    {
-      name,
-      email,
-      password, // ⚠️ ¡Recomendado hashear aquí también!
-      telephone,
-      dui,
-      address,
-      workstation,
-      hireDate,
-      salary,
-    },
-    { new: true }
-  );
+  // Si se envía una nueva contraseña, la encriptamos
+  const updatedData = {
+    name,
+    email,
+    telephone,
+    dui,
+    address,
+    workstation,
+    hireDate,
+    salary,
+  };
+
+  if (password) {
+    updatedData.password = await bcryptjs.hash(password, 10); // Hasheamos la contraseña si se recibe
+  }
+
+  await employeeModel.findByIdAndUpdate(req.params.id, updatedData, { new: true });
 
   res.json({ message: "Empleado actualizado" });
 };
