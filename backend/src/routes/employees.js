@@ -7,7 +7,7 @@ const router = express.Router();
 router
   .route("/")
   .get(employeeController.getemployee)
-  .post(employeeController.createemployee);
+
 
 router
   .route("/:id")
